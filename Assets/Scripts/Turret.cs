@@ -8,7 +8,7 @@ public class Turret : MonoBehaviour {
     private int pooledAmount = 20;
     public GameObject projectile;
     private float fireRate = 0.1f;
-    private float speed = 4.0f;
+    private float speed = 8.0f;
     private int damage = 1;
 
     void Start() {
@@ -54,7 +54,7 @@ public class Turret : MonoBehaviour {
     void Update() {
         if (TargetEnemy()) transform.rotation = Quaternion.LookRotation(Vector3.forward, enemies[0].transform.position - transform.position);
 	}
-    
+
 
     void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag.Equals("Enemy")) {

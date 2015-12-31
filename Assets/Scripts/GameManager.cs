@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
-    public TileManager tileScript;
+    private LevelLoader levelLoader;
 
     private int level = 1;
 
@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour {
         }
 
         DontDestroyOnLoad(gameObject);
-        tileScript = GetComponent<TileManager>();
-        tileScript.SetupScene(level);
+        levelLoader = GetComponent<LevelLoader>();
+        levelLoader.SetupScene(level);
     }
 }

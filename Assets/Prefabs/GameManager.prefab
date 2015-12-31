@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d127b9a7b9ca3408848ff8cc520764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileScript: {fileID: 0}
+  levelLoader: {fileID: 0}
 --- !u!114 &11498714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,20 +52,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94e49371431dd240ac950db8fafb27c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cols: 8
-  rows: 8
-  wallCount:
-    minimum: 5
-    maximum: 9
   floorTile: {fileID: 133510, guid: 7f6e7f06c6984a0488382fe0358e0836, type: 2}
-  wallTiles: {fileID: 0}
+  wallTile: {fileID: 173272, guid: dffb4d7cefeeb31449f113921f3dd51e, type: 2}
+  pathTile: {fileID: 190784, guid: e004c853f0ba4cb44a5c4bfbd04fc6bf, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: wallTile
+      value: 
+      objectReference: {fileID: 173272, guid: dffb4d7cefeeb31449f113921f3dd51e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: pathTile
+      value: 
+      objectReference: {fileID: 190784, guid: e004c853f0ba4cb44a5c4bfbd04fc6bf, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196102}

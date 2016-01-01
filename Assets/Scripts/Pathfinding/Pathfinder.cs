@@ -9,19 +9,16 @@ public class Pathfinder {
     private List<Node> closedList;
     private int[,] level;
     private int rows, cols;
-    private Point goal;
-
-    public static List<Point> path;
+    private Point start, goal;
 
     public Pathfinder(int[,] level, int rows, int cols, Point start, Point goal) {
         openList = new List<Node>();
         closedList = new List<Node>();
-        path = new List<Point>();
         this.level = level;
         this.rows = rows;
         this.cols = cols;
+        this.start = start;
         this.goal = goal;
-        GetPath(start, goal);
     }
 
     private bool IsValidTile(Point loc) {
@@ -99,8 +96,9 @@ public class Pathfinder {
         return false;
     }
 
-    private void GetPath(Point start, Point goal) {
+    public List<Point> GetPath() {
         //Start node is the first one in the open list
+        List<Point> path = new List<Point>();
         Node n = new Node(start, goal);
         openList.Add(n);
         bool success = CalcPath(n);
@@ -122,5 +120,7 @@ public class Pathfinder {
         //Cleanup
         openList.Clear();
         closedList.Clear();
+
+        return path;
     }
 }

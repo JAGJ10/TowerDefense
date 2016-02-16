@@ -22,9 +22,13 @@ public abstract class Enemy : MonoBehaviour {
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.tag.Equals("Projectile")) {
+            TakeDamage(other.gameObject.GetComponent<Projectile>().damage);
             other.gameObject.SetActive(false);
-            health -= other.gameObject.GetComponent<Projectile>().damage;
         }
+    }
+
+    public void TakeDamage(int damage) {
+        health -= damage;
     }
 
     protected void Move() {

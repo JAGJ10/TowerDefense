@@ -7,6 +7,11 @@ public struct Point {
         x = i;
         y = j;
     }
+
+    public void setPoint(int i, int j) {
+        x = i;
+        y = j;
+    }
 }
 
 public class Node : IEquatable<Node> {

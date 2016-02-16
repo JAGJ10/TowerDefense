@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11476826}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,6 +41,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 113268, guid: f2cce204c59d42b4bb9fd74f6f85a328, type: 2}
+  turret: {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
+  placeTurret: 0
+  turretMode: 0
+  canvas: {fileID: 129952, guid: 9175066c19d713448b98650964329cbb, type: 2}
 --- !u!114 &11498714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -57,6 +61,11 @@ MonoBehaviour:
   floorTile: {fileID: 133510, guid: 7f6e7f06c6984a0488382fe0358e0836, type: 2}
   wallTile: {fileID: 173272, guid: dffb4d7cefeeb31449f113921f3dd51e, type: 2}
   pathTile: {fileID: 190784, guid: e004c853f0ba4cb44a5c4bfbd04fc6bf, type: 2}
+  turrets:
+  - {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
+  - {fileID: 113044, guid: bdf99e46bf70c4247a72ae863e225016, type: 2}
+  turretSprite: {fileID: 21300000, guid: 7042ade18b5a68942b9c71a44b65d4e2, type: 3}
+  wallSprite: {fileID: 21300000, guid: 3a5876f1db62c144d8ad8204c0ba8dbd, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -64,6 +73,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: turrets.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: wallTile
       value: 
@@ -76,6 +89,28 @@ Prefab:
       propertyPath: enemy
       value: 
       objectReference: {fileID: 113268, guid: f2cce204c59d42b4bb9fd74f6f85a328, type: 2}
+    - target: {fileID: 0}
+      propertyPath: turret
+      value: 
+      objectReference: {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
+    - target: {fileID: 0}
+      propertyPath: turretSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7042ade18b5a68942b9c71a44b65d4e2,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: wallSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3a5876f1db62c144d8ad8204c0ba8dbd,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: GameManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 129952, guid: 9175066c19d713448b98650964329cbb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196102}

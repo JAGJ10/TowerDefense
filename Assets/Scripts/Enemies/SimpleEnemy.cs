@@ -5,7 +5,7 @@ public class SimpleEnemy : Enemy {
 
     protected override void Start() {
         base.Start();
-        health = 10;
-        speed = 0.02f;
+        health = 100;
+        speed = 0.05f;
     }
 }

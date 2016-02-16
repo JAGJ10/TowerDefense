@@ -7,6 +7,10 @@ TagManager:
   - Wall
   - Enemy
   - Projectile
+  - Floor
+  - GameManager
+  - Turret
+  - UIManager
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - UI
   - 
   - 
-  - Blocking
+  - Enemies
   - 
   - 
   - 

@@ -7,10 +7,15 @@ public abstract class Turret : MonoBehaviour {
     protected int damage { get; set; }
     protected int cost { get; set; }
     protected CircleCollider2D range { get; set; }
+    public GameObject circle;
 
     protected virtual void Start() {
         enemies = new List<GameObject>();
         range = this.GetComponentInChildren<CircleCollider2D>();
+        circle = Instantiate(circle) as GameObject;
+        circle.transform.localScale = new Vector2(range.radius, range.radius);
+        circle.transform.position = this.transform.position;
+        circle.SetActive(false);
     }
 
     protected virtual bool TargetEnemy() {
@@ -42,6 +47,11 @@ public abstract class Turret : MonoBehaviour {
 
     public virtual void Upgrade() {
         range.radius *= 1.2f;
+        circle.transform.localScale = new Vector2(range.radius, range.radius);
+    }
+
+    public virtual void Toggle() {
+        circle.SetActive(!circle.activeInHierarchy);
     }
 
     //protected void OnMouseDown() {

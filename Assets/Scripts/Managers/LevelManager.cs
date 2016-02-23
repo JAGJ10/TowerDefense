@@ -88,6 +88,12 @@ public class LevelManager : MonoBehaviour {
         tiles[p.y, p.x].GetComponent<Turret>().Upgrade();
     }
 
+    public void ToggleTurret(Point p) {
+        if (level[p.y, p.x] == 2) {
+            tiles[p.y, p.x].GetComponent<Turret>().Toggle();
+        }
+    }
+
     public void Update() {
         /*if (Input.GetMouseButtonDown(0)) {
             int x = (int)(Input.mousePosition.x / 100);

@@ -44,7 +44,9 @@ MonoBehaviour:
   turret: {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
   placeTurret: 0
   turretMode: 0
-  canvas: {fileID: 129952, guid: 9175066c19d713448b98650964329cbb, type: 2}
+  upgradeMode: 0
+  panel: {fileID: 195890, guid: 4dbb7add7930f384281aadd5f6af9cb0, type: 2}
+  canvas: {fileID: 22358374, guid: 10aac9ad713710a439b9e03f06334a1d, type: 2}
 --- !u!114 &11498714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,7 +112,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: canvas
       value: 
-      objectReference: {fileID: 129952, guid: 9175066c19d713448b98650964329cbb, type: 2}
+      objectReference: {fileID: 22358374, guid: 10aac9ad713710a439b9e03f06334a1d,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: panel
+      value: 
+      objectReference: {fileID: 195890, guid: 4dbb7add7930f384281aadd5f6af9cb0, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 196102}

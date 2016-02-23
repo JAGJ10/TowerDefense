@@ -16,4 +16,12 @@ public class UIManager : Singleton<UIManager> {
         GameManager.Instance.upgradeMode = true;
         GameManager.Instance.Upgrade();
     }
+
+    public void OnPauseButton() {
+        GameManager.Instance.SetPaused();
+    }
+
+    public void OnFastForward() {
+        GameManager.Instance.SetFastForward();
+    }
 }

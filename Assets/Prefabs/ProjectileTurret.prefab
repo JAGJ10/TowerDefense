@@ -116,6 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24ff9d681e820364aaa3a6ef49a0c188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circle: {fileID: 144168, guid: 5516b0d6891f7d14aad1f1d1d1e70909, type: 2}
   projectile: {fileID: 112292, guid: 9cc8373d63ee1ba41bd0db7212f5ace8, type: 2}
 --- !u!212 &21239632
 SpriteRenderer:
@@ -170,6 +171,15 @@ Prefab:
       propertyPath: m_IsKinematic
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f1134831d5d039e40996a3fe7c1f635d,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: circle
+      value: 
+      objectReference: {fileID: 144168, guid: 5516b0d6891f7d14aad1f1d1d1e70909, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 124910}

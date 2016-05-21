@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
-
     private LevelManager levelManager;
     private Pathfinder pathFinder;
-    private int level = 1;
     private List<Point> path;
+    private int level = 1;
+    private bool fastForward = false;
+    private bool paused = false;
+    private Point selectedTurret;
+
+    public GameObject upgradePanel;
+    public GameObject turretPanel;
     public GameObject enemy;
+    public Button upgradeButton;
     public bool placeTurret = false;
     public int turretMode;
     public bool upgradeMode = false;
-    public Point selectedTurret;
-    public GameObject panel;
-    private bool fastForward = false;
-    private bool paused = false;
 
     public override void Awake() {
         base.Awake();
@@ -24,10 +26,14 @@ public class GameManager : Singleton<GameManager> {
         levelManager.SetupScene(level);
         pathFinder = new Pathfinder(levelManager.level, levelManager.rows, levelManager.cols, levelManager.start, levelManager.goal);
         path = pathFinder.GetPath();
-        //levelLoader.CreatePath(path);
+        levelManager.CreatePath(path);
 
-        panel.SetActive(false);
+        upgradePanel.SetActive(false);
         //InvokeRepeating("Spawn", 0.0f, 0.5f);
+    }
+
+    public void Start() {
+        Spawn();
     }
 
     public void Update() {
@@ -41,26 +47,18 @@ public class GameManager : Singleton<GameManager> {
                 levelManager.updateTile(p);
             }
         } else {
-            if (Input.GetMouseButtonUp(0)) {
+            if (Input.GetMouseButtonDown(0)) {
                 Vector2 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
                 RaycastHit2D hit = Physics2D.Raycast(pos, Vector2.zero);
                 if (hit.collider != null) {
                     if (hit.collider.tag != "Turret") {
-                        levelManager.ToggleTurret(selectedTurret);
-                        upgradeMode = false;
-                        //hide the upgrade buttons
-                        panel.SetActive(false);
-                    } else {
-                        panel.SetActive(true);
-                        upgradeMode = true;
-                        selectedTurret.setPoint((int)hit.transform.position.x, (int)hit.transform.position.y);
-                        levelManager.ToggleTurret(selectedTurret);
+                        ToggleUpgradeMenuOff();
                     }
                 } else {
-                    levelManager.ToggleTurret(selectedTurret);
-                    upgradeMode = false;
-                    //hide the upgrade buttons
-                    panel.SetActive(false);
+                    if (upgradePanel.activeSelf && !RectTransformUtility.RectangleContainsScreenPoint(upgradeButton.GetComponent<RectTransform>(), Input.mousePosition, Camera.main)) {
+                        levelManager.ToggleTurret(selectedTurret);
+                        ToggleUpgradeMenuOff();
+                    }
                 }
             }
         }
@@ -78,6 +76,19 @@ public class GameManager : Singleton<GameManager> {
 
     public void Upgrade() {
         if (upgradeMode) levelManager.UpgradeTurret(selectedTurret);
+    }
+
+    public void ToggleUpgradeMenuOn(Point p) {
+        selectedTurret = p;
+        upgradeMode = true;
+        turretPanel.SetActive(false);
+        upgradePanel.SetActive(true);
+    }
+
+    public void ToggleUpgradeMenuOff() {
+        upgradeMode = false;
+        turretPanel.SetActive(true);
+        upgradePanel.SetActive(false);
     }
 
     private void Spawn() {

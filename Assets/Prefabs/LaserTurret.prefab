@@ -31,7 +31,7 @@ GameObject:
   - 58: {fileID: 5852276}
   m_Layer: 2
   m_Name: Range
-  m_TagString: Turret
+  m_TagString: Range
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 113044}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.47205448, y: 4.772789, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 403526}
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594e7cb0b1673084699edf47832853a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  circle: {fileID: 144168, guid: 5516b0d6891f7d14aad1f1d1d1e70909, type: 2}
 --- !u!120 &12090700
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -195,7 +196,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: Turret
+      value: Range
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
@@ -220,6 +221,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsKinematic
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: circle
+      value: 
+      objectReference: {fileID: 144168, guid: 5516b0d6891f7d14aad1f1d1d1e70909, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

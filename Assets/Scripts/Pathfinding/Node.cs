@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 public struct Point {
     public int x, y;
@@ -24,6 +23,7 @@ public class Node : IEquatable<Node> {
         set {
             this.mParent = value;
             if (value != null) this.gScore = this.mParent.gScore + ManhattanDist(this.p, this.mParent.p);
+            else this.gScore = 0;
         }
     }
 

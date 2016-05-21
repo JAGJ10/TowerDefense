@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 
 public abstract class Enemy : MonoBehaviour {
-    protected int health { get; set; }
-    protected float speed { get; set; }
-    public List<Point> path { get; set; }
+    protected int health;
+    protected float speed;
     protected Rigidbody2D rb2d;
     private int waypoint = 0;
 
-    protected virtual void Start() {
+    public List<Point> path;
+
+    protected virtual void Awake() {
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -32,17 +33,18 @@ public abstract class Enemy : MonoBehaviour {
     }
 
     protected void Move() {
-        //while (path.Count > 0) {
-            Vector2 pos = transform.position;
-            Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
+        if (waypoint >= path.Count) {
+            Destroy(gameObject);
+            return;
+        }
+        Vector2 pos = transform.position;
+        Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
 
-            if (direction.magnitude < 0.001f) {
-                waypoint++;
-            }
+        if (direction.magnitude < 0.01f) {
+            waypoint++;
+        }
 
-            direction = direction.normalized;
-            //rb2d.velocity = new Vector2(direction.x * speed, direction.y * speed);
+        direction = direction.normalized;
         transform.Translate(new Vector3(direction.x * speed, direction.y * speed, 0));
-        //}
     }
 }

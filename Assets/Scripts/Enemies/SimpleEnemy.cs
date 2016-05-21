@@ -3,8 +3,8 @@ using System.Collections.Generic;
 
 public class SimpleEnemy : Enemy {
 
-    protected override void Start() {
-        base.Start();
+    protected override void Awake() {
+        base.Awake();
         health = 100;
         speed = 0.05f;
     }

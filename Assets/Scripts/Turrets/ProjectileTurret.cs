@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 
 public class ProjectileTurret : Turret {
-    protected List<GameObject> projectiles { get; set; }
-    private int pooledAmount = 10;
-    public GameObject projectile;
+    private int pooledAmount = 30;
     private float fireRate = 0.1f;
-    private float speed = 8.0f;
+    private float speed = 12.0f;
 
-    protected override void Start() {
-        base.Start();
+    private List<GameObject> projectiles;
+    public GameObject projectile;
+
+    protected override void Awake() {
+        base.Awake();
         damage = 10;
         projectiles = new List<GameObject>();
         for (int i = 0; i < pooledAmount; i++) {
             GameObject obj = Instantiate(projectile) as GameObject;
             obj.GetComponent<Projectile>().damage = damage;
             obj.SetActive(false);
-            //obj.transform.SetParent(this.transform);
+            //obj.transform.SetParent(transform);
             projectiles.Add(obj);
         }
 

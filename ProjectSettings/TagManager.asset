@@ -11,6 +11,8 @@ TagManager:
   - GameManager
   - Turret
   - UIManager
+  - Range
+  - UpgradeButton
   layers:
   - Default
   - TransparentFX

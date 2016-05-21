@@ -40,13 +40,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d127b9a7b9ca3408848ff8cc520764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upgradePanel: {fileID: 0}
+  turretPanel: {fileID: 0}
   enemy: {fileID: 113268, guid: f2cce204c59d42b4bb9fd74f6f85a328, type: 2}
-  turret: {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
+  upgradeButton: {fileID: 0}
   placeTurret: 0
   turretMode: 0
   upgradeMode: 0
-  panel: {fileID: 195890, guid: 4dbb7add7930f384281aadd5f6af9cb0, type: 2}
-  canvas: {fileID: 22358374, guid: 10aac9ad713710a439b9e03f06334a1d, type: 2}
 --- !u!114 &11498714
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -60,12 +60,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cols: 25
   rows: 15
-  floorTile: {fileID: 133510, guid: 7f6e7f06c6984a0488382fe0358e0836, type: 2}
   wallTile: {fileID: 173272, guid: dffb4d7cefeeb31449f113921f3dd51e, type: 2}
   pathTile: {fileID: 190784, guid: e004c853f0ba4cb44a5c4bfbd04fc6bf, type: 2}
   turrets:
   - {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
   - {fileID: 113044, guid: bdf99e46bf70c4247a72ae863e225016, type: 2}
+  - {fileID: 112812, guid: 720fa9ad252ce9f48a255ccbaa1a9f18, type: 2}
   turretSprite: {fileID: 21300000, guid: 7042ade18b5a68942b9c71a44b65d4e2, type: 3}
   wallSprite: {fileID: 21300000, guid: 3a5876f1db62c144d8ad8204c0ba8dbd, type: 3}
 --- !u!1001 &100100000
@@ -77,7 +77,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: turrets.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: wallTile

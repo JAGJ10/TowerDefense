@@ -4,12 +4,11 @@ using System;
 
 public class LaserTurret : Turret {
     private LineRenderer line;
-    private int layerMask = 1 << 8; // enemy layer
-
-    protected override void Start() {
-        base.Start();
+    
+    protected override void Awake() {
+        base.Awake();
+        line = GetComponent<LineRenderer>();
         damage = 1;
-        line = this.GetComponent<LineRenderer>();
     }
 
     protected override void Fire() {

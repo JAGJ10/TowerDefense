@@ -21,11 +21,17 @@ public class ProjectileTurret : Turret {
             projectiles.Add(obj);
         }
 
-        InvokeRepeating("Fire", 0.0f, fireRate);
+        //InvokeRepeating("Fire", 0.0f, fireRate);
+    }
+
+    protected override void Update() {
+        base.Update();
+        //TODO: Is this the best way to set a delay?
+        if (TargetEnemy() && !IsInvoking("Fire")) Invoke("Fire", fireRate);
     }
 
     protected override void Fire() {
-        if (TargetEnemy()) {
+        //if (TargetEnemy()) {
             for (int i = 0; i < projectiles.Count; i++) {
                 if (!projectiles[i].activeSelf) {
                     projectiles[i].transform.position = transform.position;
@@ -35,6 +41,6 @@ public class ProjectileTurret : Turret {
                     break;
                 }
             }
-        }
+        //}
     }
 }

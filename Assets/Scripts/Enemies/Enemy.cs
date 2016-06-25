@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public abstract class Enemy : MonoBehaviour {
     protected int health;
+    protected RectTransform healthBar;
     protected float speed;
     protected Rigidbody2D rb2d;
     private int waypoint = 0;
@@ -10,6 +11,7 @@ public abstract class Enemy : MonoBehaviour {
     public List<Point> path;
 
     protected virtual void Awake() {
+        healthBar = gameObject.transform.Find("Canvas/Health").GetComponent<RectTransform>();
         rb2d = GetComponent<Rigidbody2D>();
     }
 
@@ -30,6 +32,7 @@ public abstract class Enemy : MonoBehaviour {
 
     public void TakeDamage(int damage) {
         health -= damage;
+        healthBar.localScale = new Vector3((float)health / 100.0f, 1.0f, 1.0f);
     }
 
     protected void Move() {

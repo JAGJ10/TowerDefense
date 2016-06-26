@@ -11,7 +11,7 @@ public class ProjectileTurret : Turret {
 
     protected override void Awake() {
         base.Awake();
-        damage = 10;
+        damage = 10.0f;
         projectiles = new List<GameObject>();
         for (int i = 0; i < pooledAmount; i++) {
             GameObject obj = Instantiate(projectile) as GameObject;
@@ -32,12 +32,12 @@ public class ProjectileTurret : Turret {
 
     protected override void Fire() {
         //if (TargetEnemy()) {
-            for (int i = 0; i < projectiles.Count; i++) {
-                if (!projectiles[i].activeSelf) {
-                    projectiles[i].transform.position = transform.position;
-                    projectiles[i].transform.rotation = transform.rotation;
-                    projectiles[i].SetActive(true);
-                    projectiles[i].GetComponent<Rigidbody2D>().velocity = speed * transform.up;
+            foreach (GameObject proj in projectiles) {
+                if (!proj.activeSelf) {
+                    proj.transform.position = transform.position;
+                    proj.transform.rotation = transform.rotation;
+                    proj.SetActive(true);
+                    proj.GetComponent<Rigidbody2D>().velocity = speed * transform.up;
                     break;
                 }
             }

@@ -4,21 +4,19 @@ using UnityEngine.EventSystems;
 
 public abstract class Turret : MonoBehaviour, IPointerClickHandler {
     protected List<GameObject> enemies;
-    protected int damage;
+    protected float damage;
     protected int cost;
     protected CircleCollider2D range;
+    protected SpriteRenderer circle;
     protected int layerMask = 1 << 8; //enemy layer
     private Point position;
-
-    public GameObject circle;
 
     protected virtual void Awake() {
         enemies = new List<GameObject>();
         range = GetComponentInChildren<CircleCollider2D>();
-        circle = Instantiate(circle) as GameObject;
+        circle = transform.Find("circle").GetComponent<SpriteRenderer>();
         circle.transform.localScale = new Vector2(range.radius, range.radius);
-        circle.transform.position = transform.position;
-        circle.SetActive(false);
+        circle.enabled = false;
         position = new Point((int)transform.position.x, (int)transform.position.y);
     }
 
@@ -38,15 +36,11 @@ public abstract class Turret : MonoBehaviour, IPointerClickHandler {
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D other) {
-        if (other.gameObject.tag.Equals("Enemy")) {
-            enemies.Add(other.gameObject);
-        }
+        if (other.gameObject.tag.Equals("Enemy")) enemies.Add(other.gameObject);
     }
 
     protected virtual void OnTriggerExit2D(Collider2D other) {
-        if (other.gameObject.tag.Equals("Enemy")) {
-            enemies.Remove(other.gameObject);
-        }
+        if (other.gameObject.tag.Equals("Enemy")) enemies.Remove(other.gameObject);
     }
 
     public virtual void Upgrade() {
@@ -55,11 +49,11 @@ public abstract class Turret : MonoBehaviour, IPointerClickHandler {
     }
 
     public virtual void ToggleOff() {
-        circle.SetActive(false);
+        circle.enabled = false;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        circle.SetActive(true);
+        circle.enabled = true;
         GameManager.Instance.ToggleUpgradeMenuOn(position);
     }
 }

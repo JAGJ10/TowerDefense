@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Projectile : MonoBehaviour {
-    public int damage;
+    public float damage;
 
     void OnEnable() {
         Invoke("Destroy", 2.0f);

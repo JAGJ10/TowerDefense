@@ -8,7 +8,7 @@ public class LaserTurret : Turret {
     protected override void Awake() {
         base.Awake();
         line = GetComponent<LineRenderer>();
-        damage = 1;
+        damage = 30.0f;
     }
 
     protected override void Fire() {
@@ -20,7 +20,7 @@ public class LaserTurret : Turret {
                 Enemy enemy = hit.collider.GetComponent<Enemy>();
                 if (enemy != null) {
                     line.SetPosition(1, hit.point);
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(Time.deltaTime * damage);
                 }
             }
         } else {

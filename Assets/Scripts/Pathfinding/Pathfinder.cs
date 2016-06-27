@@ -20,18 +20,18 @@ public class Pathfinder {
         this.goal = goal;
     }
 
-    private bool IsValidTile(Point loc) {
+    private bool IsTileValid(Point loc) {
         if (loc.x < 0 || loc.x >= cols || loc.y < 0 || loc.y >= rows) return false;
         else return true;
     }
 
-    private bool IsWall(Point loc) {
-        if (level[loc.y, loc.x] == 1) return true;
+    private bool IsBlocked(Point loc) {
+        if (level[loc.y, loc.x] == 1 || level[loc.y, loc.x] == 2) return true;
         else return false;
     }
 
     private void InsertOpen(Point adj, Node cur, Node n) {
-        if (IsValidTile(adj) && !IsWall(adj) && !closedList.Contains(n)) {
+        if (IsTileValid(adj) && !IsBlocked(adj) && !closedList.Contains(n)) {
             var temp = openList.SingleOrDefault(node => node.p.Equals(n.p));
             if (temp != null) {
                 if (n.fScore < temp.fScore) {

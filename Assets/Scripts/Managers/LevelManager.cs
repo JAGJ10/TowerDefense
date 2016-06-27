@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 
 public class LevelManager : Singleton<LevelManager> {
+    private Pathfinder pathFinder;
+    private List<Point> path;
+    private Transform grid;
+    private GameObject[,] tiles = new GameObject[15, 25];
+
     public int cols = 25;
     public int rows = 15;
 
@@ -10,9 +15,6 @@ public class LevelManager : Singleton<LevelManager> {
     public GameObject[] turrets;
     public Sprite turretSprite;
     public Sprite wallSprite;
-
-    private Transform grid;
-    private GameObject[,] tiles = new GameObject[15, 25];
 
     public int[,] level = new int[15, 25] { {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -32,6 +34,14 @@ public class LevelManager : Singleton<LevelManager> {
 
     public Point start { get; private set; }
     public Point goal { get; private set; }
+
+    public override void Awake() {
+        base.Awake();
+        SetupScene(1);
+        pathFinder = new Pathfinder(level, rows, cols, start, goal);
+        path = pathFinder.GetPath();
+        CreatePath(path);
+    }
 
     private void LoadLevel(int levelNum) {
         start = new Point(0, 1);
@@ -69,7 +79,7 @@ public class LevelManager : Singleton<LevelManager> {
         }
     }
 
-    public bool IsTileValid(Point p) {
+    public bool IsTileOpen(Point p) {
         if (level[p.y, p.x] == 0) return true;
         else return false;
     }

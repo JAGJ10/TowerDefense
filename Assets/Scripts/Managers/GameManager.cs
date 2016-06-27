@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
-    private Pathfinder pathFinder;
-    private List<Point> path;
-    private int level = 1;
     private bool fastForward = false;
     private bool paused = false;
     private Point selectedTurret;
@@ -20,12 +17,6 @@ public class GameManager : Singleton<GameManager> {
 
     public override void Awake() {
         base.Awake();
-
-        LevelManager.Instance.SetupScene(level);
-        pathFinder = new Pathfinder(LevelManager.Instance.level, LevelManager.Instance.rows, LevelManager.Instance.cols, LevelManager.Instance.start, LevelManager.Instance.goal);
-        path = pathFinder.GetPath();
-        LevelManager.Instance.CreatePath(path);
-
         upgradePanel.SetActive(false);
         //InvokeRepeating("Spawn", 0.0f, 0.5f);
     }

@@ -26,7 +26,7 @@ public class TurretCreator : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public void OnDrag(PointerEventData eventData) {
         Vector3 mPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Point p = new Point((int)(mPos.x + 0.5f), (int)(mPos.y + 0.5f));
-        if (LevelManager.Instance.IsTileValid(p)) hoverRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
+        if (LevelManager.Instance.IsTileOpen(p)) hoverRenderer.color = new Color(1.0f, 1.0f, 1.0f, 0.5f);
         else hoverRenderer.color = new Color(1.0f, 0.0f, 0.0f, 0.5f);
 
         turretHover.transform.position = new Vector3(p.x, p.y, 0.0f);

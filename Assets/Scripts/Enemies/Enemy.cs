@@ -56,6 +56,16 @@ public abstract class Enemy : MonoBehaviour {
 		alteredSpeedDuration = duration;
 	}
 
+	public List<Enemy> CheckZapNeighbors(float zapRadius) {
+		List<Enemy> zapped = new List<Enemy> ();
+		foreach (Collider2D col in Physics2D.OverlapCircleAll (new Vector2 (transform.position.x, transform.position.y), zapRadius)) {
+			if (col.gameObject.tag == "Enemy") {
+				zapped.Add (col.gameObject.GetComponent<Enemy>());
+			}
+		}
+		return zapped;
+	}
+
     protected void Move() {
         if (waypoint >= path.Count) {
             Destroy(gameObject);

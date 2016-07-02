@@ -66,6 +66,15 @@ public abstract class Enemy : MonoBehaviour {
 		alteredSpeedDuration = duration;
 	}
 
+    protected void Move() {
+        if (waypoint >= path.Count) {
+            Destroy(gameObject);
+            return;
+        }
+        Vector2 pos = transform.position;
+        Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
+    }
+
 	public List<Enemy> CheckZapNeighbors(float zapRadius) {
 		List<Enemy> zapped = new List<Enemy> ();
 		foreach (Collider2D col in Physics2D.OverlapCircleAll (new Vector2 (transform.position.x, transform.position.y), zapRadius)) {
@@ -79,21 +88,5 @@ public abstract class Enemy : MonoBehaviour {
 	public void TakeDamageOverTime(float _damage, float duration) {
 		damageOverTime = _damage;
 		damageOverTimeDuration = duration;
-	}
-
-    protected void Move() {
-//	    if (waypoint >= path.Count) {
-//            Destroy(gameObject);
-//            return;
-//        }
-//        Vector2 pos = transform.position;
-//        Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
-//
-//        if (direction.magnitude < 0.01f) {
-//            waypoint++;
-//        }
-//
-//        direction = direction.normalized;
-//        transform.Translate(new Vector3(direction.x * speed, direction.y * speed, 0));
 	}
 }

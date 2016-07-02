@@ -5,7 +5,9 @@ public abstract class Enemy : MonoBehaviour {
     protected float maxHealth;
     protected float health;
     protected RectTransform healthBar;
+	protected float originalSpeed;
     protected float speed;
+	protected float alteredSpeedDuration;
     protected Rigidbody2D rb2d;
     private int waypoint = 0;
 
@@ -16,8 +18,21 @@ public abstract class Enemy : MonoBehaviour {
         rb2d = GetComponent<Rigidbody2D>();
     }
 
+	protected virtual void Start() {
+		originalSpeed = speed;
+	}
+
     protected virtual void Update() {
         if (health <= 0) Destroy(gameObject);
+
+		if (alteredSpeedDuration != 0) {
+			alteredSpeedDuration -= Time.deltaTime;
+			if (alteredSpeedDuration <= 0) {
+				speed = originalSpeed;
+				alteredSpeedDuration = 0;
+			}
+
+		}
     }
 
     protected virtual void FixedUpdate() {
@@ -35,6 +50,11 @@ public abstract class Enemy : MonoBehaviour {
         health -= damage;
         healthBar.localScale = new Vector3(health / maxHealth, 1.0f, 1.0f);
     }
+
+	public void AlterSpeed(float mulitiplier, float duration) {
+		speed *= mulitiplier;
+		alteredSpeedDuration = duration;
+	}
 
     protected void Move() {
         if (waypoint >= path.Count) {

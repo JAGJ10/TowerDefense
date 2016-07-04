@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
 public class FreezeTurret : Turret {
     private float speedMultiplier = 0.10f;
     private float alteredSpeedDuration = 2.0f;
 
     private ParticleSystem particles;
-    private float particlesStartTime;
+    private float particlesStartTime = 0.0f;
 
     protected override void Awake() {
         base.Awake();

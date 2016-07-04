@@ -14,8 +14,8 @@ public class SwipeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
     private Vector3 lerpTarget, startPos;
 
     //Fade in/out button variables
-    public Color darkColor;
-    public Color lightColor;
+    private Color darkColor = new Color(0.25f, 0.25f, 0.25f);
+    private Color lightColor = new Color(1.0f, 1.0f, 1.0f);
     private Vector3 largeScale = new Vector3(1.0f, 1.0f, 1.0f);
     private Vector3 smallScale = new Vector3(0.7f, 0.7f, 1.0f);
 
@@ -24,7 +24,7 @@ public class SwipeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void Awake() {
         selectedLevelIndex = 0;
-        //levelTitle.text
+        levelTitle.text = container.transform.GetChild(selectedLevelIndex).GetComponent<LevelButton>().levelName;
 
         int numLevels = container.childCount;
 
@@ -39,8 +39,18 @@ public class SwipeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
 
     public void Update() {
         if (lerp) {
-            container.localPosition = Vector3.Lerp(container.localPosition, lerpTarget, 10.0f * Time.deltaTime);
-            if (Vector3.Distance(container.localPosition, lerpTarget) < 0.01f) {
+            container.localPosition = Vector3.Lerp(container.localPosition, lerpTarget, 7.5f * Time.deltaTime);
+            int dir = container.localPosition.x > lerpTarget.x ? 1 : -1;
+            //Fade(dir);
+            if (Mathf.Abs(container.localPosition.x - lerpTarget.x) < 0.1f) {
+                if (dir > 0) {
+                    container.localPosition = new Vector3(Mathf.Floor(container.localPosition.x), container.localPosition.y);
+                } else {
+                    container.localPosition = new Vector3(Mathf.Ceil(container.localPosition.x), container.localPosition.y);
+                }
+                //Fade(-dir);
+                selectedLevelIndex = -(int)container.localPosition.x / (int)buttonSpacing;
+                levelTitle.text = (container.transform.GetChild(selectedLevelIndex).GetComponent<LevelButton>().levelName);
                 lerp = false;
             }
         }
@@ -50,7 +60,6 @@ public class SwipeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         lerp = false;
         touchStart = eventData.position;
         touchOrig = touchStart;
-        //Need to change startPos to current button's position, not container's position
         startPos = container.localPosition;
     }
 
@@ -74,11 +83,22 @@ public class SwipeManager : MonoBehaviour, IBeginDragHandler, IDragHandler, IEnd
         totalSlide += slideAmount;
         if (Mathf.Abs(totalSlide) < buttonSpacing) container.Translate(slideAmount, 0.0f, 0.0f);
         container.localPosition = new Vector2(Mathf.Clamp(container.localPosition.x, startPos.x - buttonSpacing, startPos.x + buttonSpacing), container.localPosition.y);
-        int nextIndex = Mathf.Clamp(Mathf.RoundToInt(-transform.localPosition.x / buttonSpacing), 0, transform.childCount - 1);
-        if (nextIndex != selectedLevelIndex) {
-            prevSelectedLevelIndex = selectedLevelIndex;
+        int dir = container.localPosition.x < startPos.x ? 1 : -1;
+        Fade(dir);
+    }
+
+    private void Fade(int dir) {
+        float t;
+        if (dir > 0) {
+            float shift = selectedLevelIndex * buttonSpacing;
+            t = (-container.localPosition.x - shift) / buttonSpacing;
+            container.transform.GetChild(selectedLevelIndex + 1).GetComponent<Image>().color = Color.Lerp(darkColor, lightColor, t);
+            container.transform.GetChild(selectedLevelIndex).GetComponent<Image>().color = Color.Lerp(darkColor, lightColor, 1-t);
+        } else {
+            float shift = (selectedLevelIndex - 1) * buttonSpacing;
+            t = (-container.localPosition.x - shift) / buttonSpacing;
+            container.transform.GetChild(selectedLevelIndex).GetComponent<Image>().color = Color.Lerp(darkColor, lightColor, t);
+            container.transform.GetChild(selectedLevelIndex - 1).GetComponent<Image>().color = Color.Lerp(darkColor, lightColor, 1-t);
         }
-        selectedLevelIndex = nextIndex;
-        //currentLevelTitle.text = (container.transform.GetChild(selectedLevelIndex).GetComponent<LevelButton>().levelName);
     }
 }

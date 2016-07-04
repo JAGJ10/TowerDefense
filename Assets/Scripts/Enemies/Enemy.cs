@@ -37,11 +37,8 @@ public abstract class Enemy : MonoBehaviour {
 
 		if (damageOverTimeDuration != 0) {
 			damageOverTimeDuration -= Time.deltaTime;
-			if (damageOverTimeDuration > 0) {
-				TakeDamage (damageOverTime);
-			} else {
-				damageOverTimeDuration = 0;
-			}
+			if (damageOverTimeDuration > 0) TakeDamage(damageOverTime);
+			else damageOverTimeDuration = 0;
 		}
     }
 
@@ -56,16 +53,6 @@ public abstract class Enemy : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(float damage) {
-        health -= damage;
-        healthBar.localScale = new Vector3(health / maxHealth, 1.0f, 1.0f);
-    }
-
-	public void AlterSpeed(float mulitiplier, float duration) {
-		speed *= mulitiplier;
-		alteredSpeedDuration = duration;
-	}
-
     protected void Move() {
         if (waypoint >= path.Count) {
             Destroy(gameObject);
@@ -75,18 +62,18 @@ public abstract class Enemy : MonoBehaviour {
         Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
     }
 
-	public List<Enemy> CheckZapNeighbors(float zapRadius) {
-		List<Enemy> zapped = new List<Enemy> ();
-		foreach (Collider2D col in Physics2D.OverlapCircleAll (new Vector2 (transform.position.x, transform.position.y), zapRadius)) {
-			if (col.gameObject.tag == "Enemy") {
-				zapped.Add (col.gameObject.GetComponent<Enemy>());
-			}
-		}
-		return zapped;
-	}
+    public void TakeDamage(float damage) {
+        health -= damage;
+        healthBar.localScale = new Vector3(health / maxHealth, 1.0f, 1.0f);
+    }
 
-	public void TakeDamageOverTime(float _damage, float duration) {
-		damageOverTime = _damage;
+    public void TakeDamageOverTime(float damage, float duration) {
+		damageOverTime = damage;
 		damageOverTimeDuration = duration;
 	}
+
+    public void AlterSpeed(float mulitiplier, float duration) {
+        speed *= mulitiplier;
+        alteredSpeedDuration = duration;
+    }
 }

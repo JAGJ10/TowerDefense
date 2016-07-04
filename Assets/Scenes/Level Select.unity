@@ -168,6 +168,18 @@ Prefab:
       propertyPath: levelName
       value: One
       objectReference: {fileID: 0}
+    - target: {fileID: 11475796, guid: 6141589971af98b4f917ba02a94f865e, type: 2}
+      propertyPath: m_Color.r
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475796, guid: 6141589971af98b4f917ba02a94f865e, type: 2}
+      propertyPath: m_Color.g
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 11475796, guid: 6141589971af98b4f917ba02a94f865e, type: 2}
+      propertyPath: m_Color.b
+      value: 0.2509804
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6141589971af98b4f917ba02a94f865e, type: 2}
   m_IsPrefabParent: 0
@@ -1028,10 +1040,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8cc6e15e24910489238d64d4f05577, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkColor: {r: 0, g: 0, b: 0, a: 0}
-  lightColor: {r: 0, g: 0, b: 0, a: 0}
   container: {fileID: 1892887138}
-  levelTitle: {fileID: 0}
+  levelTitle: {fileID: 636213336}
 --- !u!114 &1104267627
 MonoBehaviour:
   m_ObjectHideFlags: 0

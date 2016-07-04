@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
-
-public class SimpleEnemy : Enemy {
+﻿public class SimpleEnemy : Enemy {
 
     protected override void Awake() {
         base.Awake();

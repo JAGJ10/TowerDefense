@@ -22,11 +22,8 @@ public abstract class Turret : MonoBehaviour, IPointerClickHandler {
 
     protected virtual bool TargetEnemy() {
         enemies.RemoveAll(enemy => enemy == null);
-        if (enemies.Count > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        if (enemies.Count > 0) return true;
+        else return false;
     }
 
     protected abstract void Fire();

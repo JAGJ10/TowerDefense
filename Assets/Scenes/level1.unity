@@ -1894,6 +1894,9 @@ MonoBehaviour:
   - {fileID: 124910, guid: 3788e369077a7b54fbed46214fdcceaa, type: 2}
   - {fileID: 113044, guid: bdf99e46bf70c4247a72ae863e225016, type: 2}
   - {fileID: 112812, guid: 720fa9ad252ce9f48a255ccbaa1a9f18, type: 2}
+  - {fileID: 113044, guid: 44b2fbdde17d1fe4db682e9c2ad89845, type: 2}
+  - {fileID: 112812, guid: 1d669c7060e01dc41b2af22dd9c56922, type: 2}
+  - {fileID: 112812, guid: 47364066df2ff0d4f92a8d5768150e7e, type: 2}
   turretSprite: {fileID: 21300000, guid: 7042ade18b5a68942b9c71a44b65d4e2, type: 3}
   wallSprite: {fileID: 21300000, guid: 3a5876f1db62c144d8ad8204c0ba8dbd, type: 3}
 --- !u!4 &2042358386

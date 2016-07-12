@@ -5,10 +5,10 @@ public class LevelManager : Singleton<LevelManager> {
     private Pathfinder pathFinder;
     private List<Point> path;
     private Transform grid;
-    private GameObject[,] tiles = new GameObject[15, 25];
+    private GameObject[,] tiles = new GameObject[15, 8];
 
-    public int cols = 25;
-    public int rows = 15;
+    private int cols = 8;
+    private int rows = 15;
 
     public GameObject wallTile;
     public GameObject pathTile;
@@ -16,21 +16,21 @@ public class LevelManager : Singleton<LevelManager> {
     public Sprite turretSprite;
     public Sprite wallSprite;
 
-    public int[,] level = new int[15, 25] { {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 3, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+    public int[,] level = new int[15, 8] {  {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {1, 1, 1, 1, 1, 1, 1, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 1, 1, 1, 1, 1, 1, 1},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {1, 1, 1, 1, 1, 1, 1, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 1, 1, 1, 1, 1, 1, 1},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {1, 1, 1, 1, 1, 1, 1, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 1, 1, 1, 1, 1, 1, 1},
+                                            {0, 0, 0, 0, 0, 0, 0, 0},
+                                            {1, 1, 1, 1, 1, 1, 1, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 3}};
 
     public Point start { get; private set; }
     public Point goal { get; private set; }
@@ -44,7 +44,7 @@ public class LevelManager : Singleton<LevelManager> {
     }
 
     private void LoadLevel(int levelNum) {
-        start = new Point(0, 1);
+        start = new Point(0, 0);
         grid = new GameObject("Grid").transform;
 
         for (int y = 0; y < rows; y++) {

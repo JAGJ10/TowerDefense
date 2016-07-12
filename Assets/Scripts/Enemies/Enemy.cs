@@ -58,8 +58,16 @@ public abstract class Enemy : MonoBehaviour {
             Destroy(gameObject);
             return;
         }
+
         Vector2 pos = transform.position;
         Vector2 direction = new Vector2(path[waypoint].x, path[waypoint].y) - pos;
+
+        if (direction.magnitude < 0.01f) {
+            waypoint++;
+        }
+
+        direction = direction.normalized;
+        transform.Translate(new Vector3(direction.x * speed, direction.y * speed, 0));
     }
 
     public void TakeDamage(float damage) {

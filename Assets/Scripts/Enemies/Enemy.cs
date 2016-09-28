@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public abstract class Enemy : MonoBehaviour {
     protected float maxHealth;
     protected float health;
+    protected int value;
     protected RectTransform healthBar;
 	protected float originalSpeed;
     protected float speed;
@@ -25,7 +26,10 @@ public abstract class Enemy : MonoBehaviour {
 	}
 
     protected virtual void Update() {
-        if (health <= 0) Destroy(gameObject);
+        if (health <= 0) {
+            GameManager.Instance.UpdateMoney(value);
+            Destroy(gameObject);
+        }
 
 		if (alteredSpeedDuration != 0) {
 			alteredSpeedDuration -= Time.deltaTime;

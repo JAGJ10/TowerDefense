@@ -3,48 +3,53 @@ using System.Collections.Generic;
 
 public class LevelManager : Singleton<LevelManager> {
     private Pathfinder pathFinder;
-    private List<Point> path;
+    public List<Point> path;
     private Transform grid;
-    private GameObject[,] tiles = new GameObject[15, 8];
+    private GameObject[,] tiles = new GameObject[15, 9];
 
-    private int cols = 8;
+    private int cols = 9;
     private int rows = 15;
 
-    public GameObject wallTile;
-    public GameObject pathTile;
-    public GameObject[] turrets;
-    public Sprite turretSprite;
-    public Sprite wallSprite;
+    [SerializeField]
+    private GameObject wallTile;
+    [SerializeField]
+    private GameObject pathTile;
+    [SerializeField]
+    private GameObject[] turrets;
+    [SerializeField]
+    private Sprite turretSprite;
+    [SerializeField]
+    private Sprite wallSprite;
 
-    public int[,] level = new int[15, 8] {  {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {1, 1, 1, 1, 1, 1, 1, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 1, 1, 1, 1, 1, 1, 1},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {1, 1, 1, 1, 1, 1, 1, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 1, 1, 1, 1, 1, 1, 1},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {1, 1, 1, 1, 1, 1, 1, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {0, 1, 1, 1, 1, 1, 1, 1},
-                                            {0, 0, 0, 0, 0, 0, 0, 0},
-                                            {1, 1, 1, 1, 1, 1, 1, 0},
-                                            {0, 0, 0, 0, 0, 0, 0, 3}};
+    public int[,] level = new int[15, 9] {  {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                            {0, 0, 0, 0, 0, 0, 0, 0, 3}};
 
     public Point start { get; private set; }
     public Point goal { get; private set; }
 
     public override void Awake() {
         base.Awake();
-        SetupScene(1);
+        LoadLevel(1);
         pathFinder = new Pathfinder(level, rows, cols, start, goal);
         path = pathFinder.GetPath();
         CreatePath(path);
     }
 
     private void LoadLevel(int levelNum) {
-        start = new Point(0, 0);
+        start = new Point(4, 0);
         grid = new GameObject("Grid").transform;
 
         for (int y = 0; y < rows; y++) {
@@ -67,10 +72,6 @@ public class LevelManager : Singleton<LevelManager> {
         }
     }
 
-    public void SetupScene(int level) {
-        LoadLevel(level);
-    }
-
     public void PlaceTurret(Point p, int turretMode) {
         if (level[p.y, p.x] == 0) {
             tiles[p.y, p.x] = Instantiate(turrets[turretMode], new Vector3(p.x, p.y, 0.0f), Quaternion.identity) as GameObject;
@@ -80,7 +81,7 @@ public class LevelManager : Singleton<LevelManager> {
     }
 
     public bool IsTileOpen(Point p) {
-        if (level[p.y, p.x] == 0) return true;
+        if (p.y >= 0 && p.y < rows && p.x >= 0 && p.x < cols && level[p.y, p.x] == 0) return true;
         else return false;
     }
 

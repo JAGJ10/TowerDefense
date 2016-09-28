@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager> {
 
+    public override void Awake() {
+        base.Awake();
+    }
+
     public void OnStartButton() {
         SceneManager.LoadScene("level1");
     }

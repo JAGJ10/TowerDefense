@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class GameManager : Singleton<GameManager> {
@@ -8,17 +7,25 @@ public class GameManager : Singleton<GameManager> {
     private Point selectedTurret;
 
     //TODO: Move these into UI manager?
-    public GameObject upgradePanel;
-    public GameObject turretPanel;
-    public GameObject enemy;
-    public Button upgradeButton;
+    [SerializeField]
+    private GameObject upgradePanel;
+    [SerializeField]
+    private GameObject turretPanel;
+    [SerializeField]
+    private GameObject enemy;
+    [SerializeField]
+    private Button upgradeButton;
+    [SerializeField]
+    private Text moneyText;
+    private int money = 30;
     public bool placeTurret = false;
     public bool upgradeMode = false;
 
     public override void Awake() {
         base.Awake();
         upgradePanel.SetActive(false);
-        //InvokeRepeating("Spawn", 0.0f, 0.5f);
+        moneyText.text = "$" + money.ToString();
+        InvokeRepeating("Spawn", 0.0f, 0.75f);
     }
 
     public void Start() {
@@ -69,9 +76,14 @@ public class GameManager : Singleton<GameManager> {
         upgradePanel.SetActive(false);
     }
 
-    /*private void Spawn() {
-        GameObject instance = Instantiate(enemy, new Vector3(0, 1, 0.0f), Quaternion.identity) as GameObject;
+    public void UpdateMoney(int delta) {
+        money += delta;
+        moneyText.text = "$" + money.ToString();
+    }
+
+    private void Spawn() {
+        GameObject instance = Instantiate(enemy, new Vector3(4, 0, 0.0f), Quaternion.identity) as GameObject;
         var enem = instance.GetComponent<Enemy>();
-        enem.path = path;
-    }*/
+        enem.path = LevelManager.Instance.path;
+    }
 }

@@ -5,5 +5,6 @@
         maxHealth = 100;
         health = 100;
         speed = 0.05f;
+        value = 1;
     }
 }

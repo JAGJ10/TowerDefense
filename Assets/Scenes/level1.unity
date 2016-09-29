@@ -1956,6 +1956,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2042358386}
   - 114: {fileID: 2042358385}
+  - 114: {fileID: 2042358387}
   m_Layer: 0
   m_Name: LevelManager
   m_TagString: Untagged
@@ -1998,6 +1999,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+--- !u!114 &2042358387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2042358384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4016f7980eae60d4cb0c13df943be6d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: TempLevel
+  wallTile: {fileID: 173272, guid: dffb4d7cefeeb31449f113921f3dd51e, type: 2}
+  levelLayout:
+    levelWidth: 0
+    levelHeight: 0
+    levelStart:
+      xPos: 0
+      yPos: 0
+    levelEnd:
+      xPos: 0
+      yPos: 0
+    tiles: []
 --- !u!1 &2059225103
 GameObject:
   m_ObjectHideFlags: 0

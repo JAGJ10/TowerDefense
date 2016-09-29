@@ -1,31 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
-
-[System.Serializable]
+﻿[System.Serializable]
 public struct LevelLayout {
 
 	public int levelWidth;
 	public int levelHeight;
+    public LevelStart levelStart;
+    public LevelEnd levelEnd;
+    public Tile[] tiles;
 
-	[System.Serializable]
+    [System.Serializable]
 	public struct LevelStart {
 		public int xPos;
 		public int yPos;
 	}
-	public LevelStart levelStart;
-
+	
 	[System.Serializable]
 	public struct LevelEnd {
 		public int xPos;
 		public int yPos;
 	}
-	public LevelEnd levelEnd;
 
 	[System.Serializable]
-	public struct Tiles {
-		public bool isWall;
+	public struct Tile {
+		public int type;
 		public int xPos;
 		public int yPos;
 	}
-	public Tiles[] tiles;
 }
